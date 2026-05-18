@@ -3,166 +3,362 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Auska's Portfolio</title>
+  <title>Auska Wang — Portfolio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@400;600;800&display=swap" rel="stylesheet">
   <style>
+    :root {
+      --bg: #ffffff;
+      --surface: #ffffff;
+      --surface2: #f5f5f5;
+      --accent: #222222;
+      --accent2: #444444;
+      --text: #111111;
+      --muted: #666666;
+      --border: #ddd;
+      --radius: 4px;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
     body {
-      font-family: Arial, sans-serif;
-      margin: 20px;
-      max-width: 900px;
-      line-height: 1.6;
-      background: #f5f5f5;
-      color: #222;
+      font-family: 'Space Mono', monospace;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.65;
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 40px 24px 80px;
     }
+
+    /* ── HEADER ── */
     header {
-      display: flex;
-      align-items: center;
-      gap: 20px;
-      margin-bottom: 40px;
-      background: #fff;
-      padding: 20px;
-      border-radius: 8px;
-    }
-    header img {
-      width: 120px;
-      height: 120px;
-      object-fit: cover;
-      border-radius: 50%;
-      border: 3px solid #333;
-    }
-    h1 {
-      margin: 0;
-    }
-    section {
-      background: #fff;
-      margin-bottom: 40px;
-      padding: 20px;
-      border-radius: 8px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.05);
-    }
-    h2 {
-      border-bottom: 2px solid #333;
-      padding-bottom: 8px;
-      margin-bottom: 16px;
-    }
-    .projects {
       display: grid;
-      grid-template-columns: repeat(auto-fit,minmax(280px,1fr));
-      gap: 24px;
+      grid-template-columns: auto 1fr;
+      gap: 36px;
+      align-items: center;
+      padding: 40px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      margin-bottom: 48px;
+      position: relative;
+      overflow: hidden;
+      animation: fadeUp 0.6s ease both;
     }
-    .project-card {
-      background: #e9ecef;
-      border-radius: 6px;
-      padding: 15px;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
+
+    header::before {
+      display: none;
     }
-    .project-card img, .project-card video {
-      max-width: 100%;
-      border-radius: 6px;
-      margin-bottom: 12px;
+
+    .avatar-wrap {
+      position: relative;
+    }
+
+    .avatar-wrap::after {
+      content: '';
+      position: absolute;
+      inset: -4px;
+      border-radius: 50%;
+      border: 2px solid var(--accent);
+      opacity: 0.6;
+    }
+
+    header img {
+      width: 110px;
+      height: 110px;
+      border-radius: 50%;
       object-fit: cover;
+      display: block;
+      filter: grayscale(20%);
     }
-    .project-card h3 {
-      margin: 0 0 10px 0;
-      font-size: 1.2rem;
+
+    .header-text .eyebrow {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.7rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 8px;
     }
-    .project-card p {
-      flex-grow: 1;
-      font-size: 0.95rem;
+
+    .header-text h1 {
+      font-family: 'Syne', sans-serif;
+      font-weight: 800;
+      font-size: clamp(2rem, 5vw, 3.2rem);
+      line-height: 1.1;
+      color: #111;
       margin-bottom: 10px;
     }
-    .resume-link {
-      display: inline-block;
-      padding: 10px 20px;
-      background-color: #333;
+
+    .header-text .subtitle {
+      font-size: 0.8rem;
+      color: var(--muted);
+    }
+
+    .header-text .subtitle span {
+      color: var(--accent2);
+    }
+
+    /* ── SECTIONS ── */
+    section {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 36px 40px;
+      margin-bottom: 32px;
+      animation: fadeUp 0.6s ease both;
+    }
+
+    section:nth-child(2) { animation-delay: 0.05s; }
+    section:nth-child(3) { animation-delay: 0.1s; }
+    section:nth-child(4) { animation-delay: 0.15s; }
+
+    .section-label {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-family: 'Space Mono', monospace;
+      font-size: 0.65rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 20px;
+    }
+
+    .section-label::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--border);
+    }
+
+    h2 {
+      font-family: 'Syne', sans-serif;
+      font-size: 1.6rem;
+      font-weight: 800;
+      color: #111;
+      margin-bottom: 16px;
+    }
+
+    p {
+      color: #444;
+      font-size: 0.88rem;
+      line-height: 1.8;
+    }
+
+    /* ── RESUME ── */
+    .resume-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 22px;
+      background: #111;
       color: #fff;
+      font-family: 'Space Mono', monospace;
+      font-size: 0.78rem;
+      font-weight: 700;
       text-decoration: none;
-      border-radius: 6px;
-      transition: background-color 0.3s;
+      border-radius: var(--radius);
+      letter-spacing: 0.05em;
+      transition: background 0.2s, transform 0.2s;
+      margin-bottom: 24px;
     }
-    .resume-link:hover {
-      background-color: #555;
+
+    .resume-btn:hover {
+      background: #333;
+      transform: translateY(-1px);
     }
+
+    .resume-btn svg { width: 14px; height: 14px; }
+
+    .pdf-frame {
+      width: 100%;
+      height: 720px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+    }
+
+    /* ── PROJECTS ── */
+    .projects {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 20px;
+    }
+
+    .project-card {
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+
+    .project-card:hover {
+      border-color: var(--accent);
+      transform: translateY(-3px);
+    }
+
+    .project-card img, .project-card video {
+      width: 100%;
+      aspect-ratio: 16/9;
+      object-fit: cover;
+      border-radius: 2px;
+      background: #222;
+      /* placeholder tint for missing images */
+      filter: brightness(0.85);
+    }
+
+    .img-placeholder {
+      width: 100%;
+      aspect-ratio: 16/9;
+      border-radius: 2px;
+      background: linear-gradient(135deg, #1f1f1f 0%, #2a2a2a 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--muted);
+      font-size: 0.7rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    .project-card h3 {
+      font-family: 'Syne', sans-serif;
+      font-size: 1rem;
+      font-weight: 700;
+      color: #fff;
+    }
+
+    .project-card p {
+      font-size: 0.8rem;
+      flex: 1;
+    }
+
+    .project-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.75rem;
+      color: var(--accent2);
+      text-decoration: none;
+      border-bottom: 1px solid transparent;
+      transition: border-color 0.2s;
+    }
+
+    .project-link:hover {
+      border-color: var(--accent2);
+    }
+
+    /* ── FOOTER ── */
     footer {
       text-align: center;
-      margin-top: 50px;
-      color: #666;
-      font-size: 0.9rem;
+      color: var(--muted);
+      font-size: 0.75rem;
+      letter-spacing: 0.08em;
+      margin-top: 56px;
+    }
+
+    footer span {
+      color: var(--accent);
+    }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(18px); }
+      to   { opacity: 1; transform: translateY(0); }
     }
   </style>
 </head>
 <body>
+
   <header>
-    <img src="headshot.png" />
-    <div>
+    <div class="avatar-wrap">
+      <img src="headshot.png" alt="Auska Wang" onerror="this.style.background='#222';this.style.border='none'" />
+    </div>
+    <div class="header-text">
+      <div class="eyebrow">Portfolio</div>
       <h1>Auska Wang</h1>
-      <p>Quality Intern @ DENSO & Computer Engineering @ Georgia Tech</p>
+      <p class="subtitle">
+        <span>Quality Intern @ DENSO</span> &nbsp;·&nbsp; Computer Engineering @ Georgia Tech
+      </p>
     </div>
   </header>
 
   <section id="about-me">
+    <div class="section-label">01 / About</div>
     <h2>About Me</h2>
     <p>
-      I'm studying Computer Engineering at Georgia Institute of Technology with an expected graduation date of December 2026. Programming an Arduino to blink an LED I wired back in 2024 encouraged me to pursue computer engineering as I enjoyed the 
-      tangilbility of seeing what I created with code appeared right before me. I enjoy pursuing to learn and experiment with all sorts of peripherals with microcontrollers to create impactful applications. 
-      As a junior, I'm actively seeking opportunities such as co-ops and internships to learn more about what it means to be an embedded software engineer. I look forward to expanding my knowledge!
+      I'm studying Computer Engineering at Georgia Institute of Technology with an expected graduation date of December 2026.
+      Programming an Arduino to blink an LED I wired back in 2024 encouraged me to pursue computer engineering — I enjoyed the
+      tangibility of seeing what I created with code appear right before me. I enjoy learning and experimenting with all sorts
+      of peripherals with microcontrollers to create impactful applications. As a junior, I'm actively seeking co-ops and
+      internships to learn more about what it means to be an embedded software engineer. I look forward to expanding my knowledge!
     </p>
   </section>
 
   <section id="resume">
-  <h2>Resume</h2>
-  <a class="resume-link" href="resume.pdf" target="_blank" rel="noopener">Download my Resume (PDF)</a>
-  
-  <div style="margin-top: 20px; border: 1px solid #ccc; border-radius: 6px; overflow: hidden; max-width: 700px; height: 800px;">
-    <iframe 
-      src="resume.pdf" 
-      style="width: 100%; height: 100%; border: none;" 
-      title="Auska Wang Resume">
-    </iframe>
-  </div>
-</section>
+    <div class="section-label">02 / Resume</div>
+    <h2>Resume</h2>
+    <a class="resume-btn" href="resume.pdf" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+        <polyline points="7 10 12 15 17 10"/>
+        <line x1="12" y1="15" x2="12" y2="3"/>
+      </svg>
+      Download PDF
+    </a>
+    <iframe class="pdf-frame" src="resume.pdf" title="Auska Wang Resume"></iframe>
+  </section>
 
   <section id="projects">
+    <div class="section-label">03 / Projects</div>
     <h2>Projects</h2>
     <div class="projects">
 
       <div class="project-card">
-        <img src="music_reactive_led_preview.png" alt="Music Reactive LED Strip preview" />
+        <img src="music_reactive_led_preview.png" alt="Music Reactive LED Strip"
+             onerror="this.outerHTML='<div class=\'img-placeholder\'>Preview</div>'" />
         <h3>Music Reactive LED Strip</h3>
-        <p>A project that synchronizes LED strip lighting effects with music beats using STM32 and WS2812 LEDs.</p>
-        <a href="https://github.com/tastyshowers/Music_Reactive_LED_Strip" target="_blank" rel="noopener">View on GitHub</a>
+        <p>Synchronizes LED strip lighting effects with music beats using STM32 and WS2812 LEDs.</p>
+        <a class="project-link" href="https://github.com/tastyshowers/Music_Reactive_LED_Strip" target="_blank" rel="noopener">
+          ↗ View on GitHub
+        </a>
       </div>
 
       <div class="project-card">
-        <!-- Example: if you have a video, uncomment this and comment img -->
-        <!-- <video src="bluetooth_music_demo.mp4" controls></video> -->
-        <img src="bluetooth_music_led_preview.jpg" alt="Bluetooth Music LED Strip preview" />
+        <img src="bluetooth_music_led_preview.jpg" alt="Bluetooth Music LED Strip"
+             onerror="this.outerHTML='<div class=\'img-placeholder\'>Preview</div>'" />
         <h3>Bluetooth Music LED Strip</h3>
-        <p>Bluetooth-controlled LED strip with music visualization using HM-10 module and STM32.</p>
-        <a href="https://github.com/tastyshowers/bluetooth_music_led_strip" target="_blank" rel="noopener">View on GitHub</a>
+        <p>Bluetooth-controlled LED strip with music visualization using the HM-10 module and STM32.</p>
+        <a class="project-link" href="https://github.com/tastyshowers/bluetooth_music_led_strip" target="_blank" rel="noopener">
+          ↗ View on GitHub
+        </a>
       </div>
 
       <div class="project-card">
-        <img src="temp_humidity_monitor_v1_preview.png" alt="Temp and Humidity Monitor V1 preview" />
-        <h3>Temperature & Humidity Monitoring System V1</h3>
-        <p>Firmware for logging environmental data using DHT22 sensor and transmitting via Bluetooth.</p>
-        <a href="https://github.com/tastyshowers/Temperature_and_Humidity_Monitoring_System" target="_blank" rel="noopener">View on GitHub</a>
+        <img src="temp_humidity_monitor_v1_preview.png" alt="Temp and Humidity Monitor V1"
+             onerror="this.outerHTML='<div class=\'img-placeholder\'>Preview</div>'" />
+        <h3>Temp & Humidity Monitor V1</h3>
+        <p>Firmware for logging environmental data using a DHT22 sensor and transmitting via Bluetooth.</p>
+        <a class="project-link" href="https://github.com/tastyshowers/Temperature_and_Humidity_Monitoring_System" target="_blank" rel="noopener">
+          ↗ View on GitHub
+        </a>
       </div>
 
       <div class="project-card">
-        <img src="temp_humidity_monitor_v2_preview.jpg" alt="Temp and Humidity Monitor V2 preview" />
-        <h3>Temperature & Humidity Monitoring System V2</h3>
-        <p>Improved version with better data validation and real-time monitoring interface.</p>
-        <a href="https://github.com/tastyshowers/Temperature_and_Humidity_Monitoring_System" target="_blank" rel="noopener">View on GitHub</a>
+        <img src="temp_humidity_monitor_v2_preview.jpg" alt="Temp and Humidity Monitor V2"
+             onerror="this.outerHTML='<div class=\'img-placeholder\'>Preview</div>'" />
+        <h3>Temp & Humidity Monitor V2</h3>
+        <p>Improved version with better data validation and a real-time monitoring interface.</p>
+        <a class="project-link" href="https://github.com/tastyshowers/Temperature_and_Humidity_Monitoring_System" target="_blank" rel="noopener">
+          ↗ View on GitHub
+        </a>
       </div>
 
     </div>
   </section>
-
-  <footer>
-    <p>© 2025 Auska Wang. All rights reserved.</p>
-  </footer>
 </body>
 </html>
